@@ -29,7 +29,7 @@ CLEAR-VISION is a deep learning project for image restoration, designed to remov
 4. **Evaluation**  
    - On validation images, restored outputs are saved in:  
      - `Validation_Data/val_generated_images`  
-   - Performance measured using **PSNR (Peak Signal-to-Noise Ratio)** and **SSIM (Structural Similarity Index)**.  
+   - Performance measured using **PSNR (Peak Signal-to-Noise Ratio)**, **SSIM (Structural Similarity Index)** and **LPIPS (Learned Perceptual Image Patch Similarity)**.  
 
 5. **Deployment**  
    - A **Streamlit app** (`Streamlit.py`) allows users to upload a corrupted image and get its restored version instantly.  
