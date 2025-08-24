@@ -4,7 +4,7 @@
 ## Project Overview  
 
 1. **Data Collection**  
-   - Images were scraped from the web using **Selenium-based automation scripts**.  
+   - 54,380 images were scraped from the web using **Selenium-based automation scripts**.  
    - Collected images were organized into:  
      - `Training_Data/clean_images` -> for training  
      - `Validation_Data/val_clean_images` -> for validation  
