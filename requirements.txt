@@ -7,6 +7,6 @@ numpy
 pankaj chahar
 aritra paul
 chat gpt
-atish 
+
 
 
