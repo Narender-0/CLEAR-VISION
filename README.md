@@ -3,4 +3,4 @@ Image degradation is common in real-world visual data due to noise, compression 
 
 
 THE LINK TO THE WEB INTERFACE IS 
-https://clear-vision-5t4bidfsqed3hvipo35y3q.streamlit.app/
+https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
