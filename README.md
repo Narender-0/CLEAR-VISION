@@ -20,7 +20,7 @@ CLEAR-VISION is a deep learning project for image restoration, designed to remov
    - We trained a **Pix2Pix GAN** (conditional GAN) to learn the mapping:  
 
       $$\large\hspace{1in} \[
-     \text{Corrupted Image} \ \rightarrow \ \text{Restored Image}
+     \text{Corrupted Image} \ \rightarrow \ \text{Generated Image}
      \]$$
      
    - The model was trained with paired datasets (`clean` vs `corrupted`).  
