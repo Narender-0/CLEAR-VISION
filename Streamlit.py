@@ -97,10 +97,10 @@ def postprocess_tensor(fake):
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 generator = UNetGenerator().to(device)
-WEIGHTS_PATH = "/content/final_generator_best.pth"   # <- put your file here
+WEIGHTS_PATH = "Final_Checkpoints/final_generator_best.pth"  
 
 state = torch.load(WEIGHTS_PATH, map_location=device)
-generator.load_state_dict(state)   # ✅ actually load weights
+generator.load_state_dict(state)  
 generator.eval()
 
 
@@ -123,7 +123,7 @@ def restore_with_tta(img_pil, device):
         # h+v flip
         preds.append(torch.flip(generator(torch.flip(x, [2,3])), [2,3]))
 
-    avg_pred = torch.mean(torch.stack(preds, dim=0), dim=0)  # average results
+    avg_pred = torch.mean(torch.stack(preds, dim=0), dim=0)  
     return postprocess_tensor(avg_pred)
 
 
@@ -238,7 +238,7 @@ uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 img = None
 if uploaded is not None:
     img = Image.open(uploaded).convert("RGB")
-elif sample_choice != " Try a sample":   # ✅ only load if it's not placeholder
+elif sample_choice != " Try a sample":   
     try:
         img = Image.open(sample_choice).convert("RGB")
     except FileNotFoundError:
@@ -270,5 +270,6 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
