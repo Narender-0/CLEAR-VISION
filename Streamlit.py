@@ -71,7 +71,6 @@ class UNetGenerator(nn.Module):
         return out
 
 
-# Same transforms as training
 
 transform = T.Compose([
     T.Resize((256, 256)),
@@ -93,7 +92,6 @@ def postprocess_tensor(fake):
 
 
 
-# Loading generator weights only
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 generator = UNetGenerator().to(device)
@@ -104,30 +102,24 @@ generator.load_state_dict(state)
 generator.eval()
 
 
-# Test-Time Augmentation (TTA)
 
 def restore_with_tta(img_pil, device):
     x = preprocess_image(img_pil, device)
 
     preds = []
     with torch.no_grad():
-        # original
         preds.append(generator(x))
 
-        # h-flip
         preds.append(torch.flip(generator(torch.flip(x, [3])), [3]))
 
-        # v-flip
         preds.append(torch.flip(generator(torch.flip(x, [2])), [2]))
 
-        # h+v flip
         preds.append(torch.flip(generator(torch.flip(x, [2,3])), [2,3]))
 
     avg_pred = torch.mean(torch.stack(preds, dim=0), dim=0)  
     return postprocess_tensor(avg_pred)
 
 
-# Streamlit UI
 
 st.set_page_config(page_title="Image Restoration GAN", layout="wide")
 st.markdown(
@@ -208,7 +200,6 @@ st.title("✨ Image Restoration Using GAN ")
 st.caption("Coding Club Project ")
 
 
-# Upload or Choose Sample
 
 SAMPLE_IMAGES = [
     "sample_images/sample-1.jpg",
@@ -230,7 +221,7 @@ SAMPLE_IMAGES = [
 ]
 
 sample_choice = st.selectbox(
-    "",  # no label
+    "",  
     [" Try a sample"] + SAMPLE_IMAGES
 )
 uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
@@ -245,7 +236,6 @@ elif sample_choice != " Try a sample":
         st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'samples/' folder.")
 
 
-# Processing
 
 if img is not None:
     c1, c2 = st.columns(2)
@@ -255,13 +245,12 @@ if img is not None:
 
     if st.button("🔮 Restore Image"):
 
-        out_img = restore_with_tta(img, device)   # restore only if blurry
+        out_img = restore_with_tta(img, device)  
 
         with c2:
             st.subheader("Restored Image")
             st.image(out_img, width=300)
 
-        # download option
         buf = io.BytesIO()
         out_img.save(buf, format="PNG")
         st.download_button(
@@ -270,6 +259,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
