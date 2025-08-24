@@ -3,8 +3,8 @@
 
 ## Project Overview  
 
-1. **Data Collection**  
-   - 54,380 images were scraped from the web using **Selenium-based automation scripts**.  
+1. **Data Collection**
+   - **54,380 images** were scraped from the web using **Selenium-based automation scripts**.  
    - Collected images were organized into:  
      - `Training_Data/clean_images` -> for training  
      - `Validation_Data/val_clean_images` -> for validation  
@@ -44,5 +44,5 @@ To evaluate the performance of our Pix2Pix GAN, we measured image restoration qu
 - *LPIPS* - **0.0979**
 
 ## Access
-The link to the web intrface is: 
+The link to the web interface is: 
 https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
