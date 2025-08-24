@@ -11,9 +11,8 @@ import numpy as np
 
 
 
-# -----------------------------
-# Model (same as your training)
-# -----------------------------
+
+
 class ResidualBlock(nn.Module):
     def __init__(self, channels):
         super().__init__()
@@ -71,9 +70,9 @@ class UNetGenerator(nn.Module):
         out = self.final(torch.cat([u3, d1], dim=1))
         return out
 
-# -----------------------------
+
 # Same transforms as training
-# -----------------------------
+
 transform = T.Compose([
     T.Resize((256, 256)),
     T.ToTensor(),
@@ -93,9 +92,9 @@ def postprocess_tensor(fake):
     return T.ToPILImage()(fake_rescal.squeeze(0).cpu())
 
 
-# -----------------------------
-# Load generator weights ONLY
-# -----------------------------
+
+# Loading generator weights only
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
 generator = UNetGenerator().to(device)
 WEIGHTS_PATH = "/content/final_generator_best.pth"   # <- put your file here
@@ -104,9 +103,9 @@ state = torch.load(WEIGHTS_PATH, map_location=device)
 generator.load_state_dict(state)   # ✅ actually load weights
 generator.eval()
 
-# -----------------------------
+
 # Test-Time Augmentation (TTA)
-# -----------------------------
+
 def restore_with_tta(img_pil, device):
     x = preprocess_image(img_pil, device)
 
@@ -127,9 +126,9 @@ def restore_with_tta(img_pil, device):
     avg_pred = torch.mean(torch.stack(preds, dim=0), dim=0)  # average results
     return postprocess_tensor(avg_pred)
 
-# -----------------------------
-# Streamlit UI (with colors)
-# -----------------------------
+
+# Streamlit UI
+
 st.set_page_config(page_title="Image Restoration GAN", layout="wide")
 st.markdown(
     """
@@ -206,14 +205,11 @@ st.markdown(
 
 
 st.title("✨ Image Restoration Using GAN ")
-st.caption("")
+st.caption("Coding Club Project ")
 
-# -----------------------------
+
 # Upload or Choose Sample
-# -----------------------------
 
-
-# --- sample images list (put your images in ./samples/)
 SAMPLE_IMAGES = [
     "sample_images/sample-1.jpg",
     "sample_images/sample-2.jpg",
@@ -248,9 +244,9 @@ elif sample_choice != " Try a sample":   # ✅ only load if it's not placeholder
     except FileNotFoundError:
         st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'samples/' folder.")
 
-# -----------------------------
+
 # Processing
-# -----------------------------
+
 if img is not None:
     c1, c2 = st.columns(2)
     with c1:
@@ -274,4 +270,5 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
