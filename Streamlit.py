@@ -1,3 +1,4 @@
+%%writefile app.py
 import streamlit as st
 import io
 from PIL import Image
@@ -97,7 +98,7 @@ def postprocess_tensor(fake):
 # -----------------------------
 device = "cuda" if torch.cuda.is_available() else "cpu"
 generator = UNetGenerator().to(device)
-WEIGHTS_PATH = "Final_Checkpoints/final_generator_best.pth"   # <- put your file here
+WEIGHTS_PATH = "/content/final_generator_best.pth"   # <- put your file here
 
 state = torch.load(WEIGHTS_PATH, map_location=device)
 generator.load_state_dict(state)   # ✅ actually load weights
@@ -205,12 +206,52 @@ st.markdown(
 
 
 st.title("✨ Image Restoration Using GAN ")
-st.caption("Improved with Test-Time Augmentation.")
+st.caption("")
 
-uploaded = st.file_uploader("📂 Upload a Corrupted image", type=["jpg", "jpeg", "png"])
+# -----------------------------
+# Upload or Choose Sample
+# -----------------------------
 
+
+# --- sample images list (put your images in ./samples/)
+SAMPLE_IMAGES = [
+    "sample_images/sample-1.jpg",
+    "sample_images/sample-2.jpg",
+    "sample_images/sample-3.jpg",
+    "sample_images/sample-4.jpg",
+    "sample_images/sample-5.jpg",
+    "sample_images/sample-6.jpg",
+    "sample_images/sample-7.jpg",
+    "sample_images/sample-8.jpg",
+    "sample_images/sample-9.jpg",
+    "sample_images/sample-10.jpg",
+    "sample_images/sample-11.jpg",
+    "sample_images/sample-12.jpg",
+    "sample_images/sample-13.jpg",
+    "sample_images/sample-14.jpg",
+    "sample_images/sample-15.jpg"
+
+]
+
+sample_choice = st.selectbox(
+    "",  # no label
+    [" Try a sample"] + SAMPLE_IMAGES
+)
+uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+
+img = None
 if uploaded is not None:
     img = Image.open(uploaded).convert("RGB")
+elif sample_choice != " Try a sample":   # ✅ only load if it's not placeholder
+    try:
+        img = Image.open(sample_choice).convert("RGB")
+    except FileNotFoundError:
+        st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'samples/' folder.")
+
+# -----------------------------
+# Processing
+# -----------------------------
+if img is not None:
     c1, c2 = st.columns(2)
     with c1:
         st.subheader("Corrupted Image")
@@ -218,19 +259,19 @@ if uploaded is not None:
 
     if st.button("🔮 Restore Image"):
 
-      out_img = restore_with_tta(img, device)   # restore only if blurry
+        out_img = restore_with_tta(img, device)   # restore only if blurry
 
-      with c2:
-          st.subheader("Restored Image")
-          st.image(out_img, width=300)
+        with c2:
+            st.subheader("Restored Image")
+            st.image(out_img, width=300)
 
-      # download option
-      buf = io.BytesIO()
-      out_img.save(buf, format="PNG")
-      st.download_button(
-          "⬇️ Download Restored",
-          data=buf.getvalue(),
-          file_name="restored.png",
-          mime="image/png"
+        # download option
+        buf = io.BytesIO()
+        out_img.save(buf, format="PNG")
+        st.download_button(
+            "⬇️ Download Restored",
+            data=buf.getvalue(),
+            file_name="restored.png",
+            mime="image/png"
+        )
 
-      )
