@@ -75,14 +75,14 @@ class UNetGenerator(nn.Module):
 transform = T.Compose([
     T.Resize((256, 256)),
     T.ToTensor(),
-    T.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5])  # [-1,1]
+    T.Normalize([0.5, 0.5, 0.5], [0.5, 0.5, 0.5]) 
 ])
 
 def rescale_to_01(x):
     return (x + 1) / 2
 
 def preprocess_image(img_pil, device):
-    x = transform(img_pil).unsqueeze(0).to(device)  # [1,3,H,W]
+    x = transform(img_pil).unsqueeze(0).to(device)  
     return x
 
 def postprocess_tensor(fake):
@@ -259,6 +259,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
