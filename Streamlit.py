@@ -1,4 +1,4 @@
-%%writefile app.py
+
 import streamlit as st
 import io
 from PIL import Image
@@ -259,6 +259,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
