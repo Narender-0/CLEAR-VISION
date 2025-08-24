@@ -97,7 +97,7 @@ def postprocess_tensor(fake):
 # -----------------------------
 device = "cuda" if torch.cuda.is_available() else "cpu"
 generator = UNetGenerator().to(device)
-WEIGHTS_PATH = "/content/final_generator_best.pth"   # <- put your file here
+WEIGHTS_PATH = "Final_Checkpoints/final_generator_best.pth"   # <- put your file here
 
 state = torch.load(WEIGHTS_PATH, map_location=device)
 generator.load_state_dict(state)   # ✅ actually load weights
@@ -232,4 +232,5 @@ if uploaded is not None:
           data=buf.getvalue(),
           file_name="restored.png",
           mime="image/png"
+
       )
