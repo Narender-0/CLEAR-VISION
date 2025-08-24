@@ -29,7 +29,7 @@
 4. **Evaluation**  
    - On validation images, restored outputs are saved in:  
      - `Validation_Data/val_generated_images`  
-   - Performance measured using **PSNR (Peak Signal-to-Noise Ratio)**, **SSIM (Structural Similarity Index)** and **LPIPS (Learned Perceptual Image Patch Similarity)**.  
+   - Performance measured using **SSIM (Structural Similarity Index Measure)**, **MS-SSIM (Multi-Scale Structural Similarity Index Measure)**, **PSNR (Peak Signal-to-Noise Ratio)**, and **LPIPS (Learned Perceptual Image Patch Similarity)**.  
 
 5. **Deployment**  
    - A **Streamlit app** (`Streamlit.py`) allows users to upload a corrupted image and get its restored version instantly.  
@@ -39,8 +39,10 @@
 
 To evaluate the performance of our Pix2Pix GAN, we measured image restoration quality using standard metrics:
 - *SSIM* - **0.9235**
-- **MS-SSIM** - **0.9828**
+- *MS-SSIM* - **0.9828**
+- *PSNR* - **28.69**
+- *LPIPS* - **0.0979**
 
 ## Access
-THE LINK TO THE WEB INTERFACE IS 
+The link to the web intrface is: 
 https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
