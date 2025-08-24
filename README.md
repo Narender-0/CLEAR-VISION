@@ -3,14 +3,11 @@ CLEAR-VISION is a deep learning project for image restoration, designed to remov
 
 ## Project Overview  
 
-**CLEAR-VISION** is a deep learning project focused on **image restoration**.  
-We built a complete pipeline that:  
-
 1. **Data Collection**  
    - Images were scraped from the web using **Selenium-based automation scripts**.  
    - Collected images were organized into:  
-     - `Training_Data/clean_images` → for training  
-     - `Validation_Data/val_clean_images` → for validation  
+     - `Training_Data/clean_images` -> for training  
+     - `Validation_Data/val_clean_images` -> for validation  
 
 2. **Corruption Generation**  
    - A custom **Corruption Module** was developed to synthetically degrade clean images.  
