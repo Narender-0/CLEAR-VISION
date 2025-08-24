@@ -35,13 +35,11 @@
    - A **Streamlit app** (`Streamlit.py`) allows users to upload a corrupted image and get its restored version instantly.  
    - Sample images are provided in `sample_images/` for quick testing.  
 
-
-
-
 ## Model Performance
 
 To evaluate the performance of our Pix2Pix GAN, we measured image restoration quality using standard metrics:
-- *SSIM*
+- *SSIM* - **0.9235**
+- **MS-SSIM** - **0.9828**
 
 ## Access
 THE LINK TO THE WEB INTERFACE IS 
