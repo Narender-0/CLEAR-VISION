@@ -38,8 +38,11 @@
 
 
 
-# Model Performance
+## Model Performance
 
-# Access
+To evaluate the performance of our Pix2Pix GAN, we measured image restoration quality using standard metrics:
+- *SSIM*
+
+## Access
 THE LINK TO THE WEB INTERFACE IS 
 https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
