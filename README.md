@@ -45,8 +45,8 @@ To evaluate the performance of our Pix2Pix GAN, we measured image restoration qu
 - *Inference Latency* - **0.18 ms/image**
 
 ## Access
-The link to the web interface is: 
-https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
+The link to the web interface is: [Streamlit app for Clear-Vision]
+(https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/)
 
 ## Sample Results
 
