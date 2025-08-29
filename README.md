@@ -46,7 +46,7 @@ To evaluate the performance of our Pix2Pix GAN, we measured image restoration qu
 
 ## Sample Results
 
-Below are some example results showing the original ground truth, the corrupted input, and the generated (restored) output.
+Below are some example results showing the original ground truth, the corrupted input and the generated (restored) output.
 
 ###  Example 1
 | Original | Corrupted | Generated |
