@@ -38,10 +38,10 @@
 ## Model Performance
 
 To evaluate the performance of our Pix2Pix GAN, we measured image restoration quality using standard metrics:
-- *SSIM* - **0.9235**
-- *MS-SSIM* - **0.9828**
-- *PSNR* - **28.69**
-- *LPIPS* - **0.0979**
+- *SSIM*              - **0.9235**
+- *MS-SSIM*           - **0.9828**
+- *PSNR*              - **28.69**
+- *LPIPS*             - **0.0979**
 - *Inference Latency* - **0.18 ms/image**
 
 ## Sample Results
