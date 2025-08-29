@@ -44,6 +44,10 @@ To evaluate the performance of our Pix2Pix GAN, we measured image restoration qu
 - *LPIPS*             - **0.0979**
 - *Inference Latency* - **0.18 ms/image**
 
+## Access
+The link to the web interface is: 
+https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
+
 ## Sample Results
 
 Below are some example results showing the original ground truth, the corrupted input and the generated (restored) output.
@@ -62,8 +66,3 @@ Below are some example results showing the original ground truth, the corrupted 
 | Original | Corrupted | Generated |
 |----------|-----------|-----------|
 | ![original3](sample_results/original3.jpg) | ![corrupted3](sample_results/corrupted3.jpg) | ![generated3](sample_results/generated3.jpg) |
-
-
-## Access
-The link to the web interface is: 
-https://clear-vision-hfvzqmpvxbpmjndreblrag.streamlit.app/
