@@ -1,5 +1,5 @@
 # CLEAR-VISION
-**CLEAR-VISION** is a deep learning project for image restoration, designed to remove corruptions from images using a **GAN-based architecture**. It includes corruption module, original and altered datasets, training pipelines, validation scripts, pre-trained checkpoints and a Streamlit demo for quick testing. This project was chosen from "*Even semsester Projects'25*", carried out by **Coding Club of IIT Guwahati**.
+**CLEAR-VISION** is a deep learning project for image restoration, designed to remove corruptions from images using a **GAN-based architecture**. It includes corruption module, original and altered datasets, training pipelines, validation scripts, pre-trained checkpoints and a Streamlit demo for quick testing. This project was developed as part of "*Even semsester Projects'25*", under the **Coding Club of IIT Guwahati**.
 
 ## Project Overview  
 
