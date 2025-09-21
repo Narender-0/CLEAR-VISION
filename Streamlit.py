@@ -226,13 +226,16 @@ img = None
 sample_choice = None
 
 with c_upload:
-    uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+    uploaded = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")  # hides label
 
 with c_sample:
-    if st.button(" Try Sample"):
-        sample_choice = st.selectbox("Select a sample image", SAMPLE_IMAGES)
+    sample_clicked = st.button("Try Sample")
 
-# Load image
+
+if sample_clicked:
+    sample_choice = st.selectbox("", SAMPLE_IMAGES, label_visibility="collapsed")
+
+
 if uploaded is not None:
     img = Image.open(uploaded).convert("RGB")
 elif sample_choice is not None:
@@ -240,6 +243,7 @@ elif sample_choice is not None:
         img = Image.open(sample_choice).convert("RGB")
     except FileNotFoundError:
         st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'sample_images/' folder.")
+
 
 
 if img is not None:
@@ -264,6 +268,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
