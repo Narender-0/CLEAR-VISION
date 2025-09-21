@@ -220,21 +220,23 @@ SAMPLE_IMAGES = [
 ]
 
 
-c_upload, c_sample = st.columns([5, 1])  # Adjust width ratio
+# Horizontal bar with two buttons: Try Sample and Browse File
+c1, c2 = st.columns([1, 1])
 
-with c_upload:
-    uploaded = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
-
-with c_sample:
-    sample_clicked = st.button("🎨 Try Sample")
-
-# Show sample selection only if button clicked
-sample_choice = None
-if sample_clicked:
-    sample_choice = st.selectbox("", SAMPLE_IMAGES, label_visibility="collapsed")
-
-# Load image
 img = None
+uploaded = None
+sample_choice = None
+
+# Column 1: Try Sample button
+with c1:
+    if st.button("🎨 Try Sample"):
+        sample_choice = st.selectbox("Select a sample image", SAMPLE_IMAGES, label_visibility="collapsed")
+
+# Column 2: Browse File button
+with c2:
+    uploaded = st.file_uploader("Browse File", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
+
+# Load image from either uploaded file or sample choice
 if uploaded is not None:
     img = Image.open(uploaded).convert("RGB")
 elif sample_choice is not None:
@@ -242,7 +244,6 @@ elif sample_choice is not None:
         img = Image.open(sample_choice).convert("RGB")
     except FileNotFoundError:
         st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'sample_images/' folder.")
-
 
 if img is not None:
     c1, c2 = st.columns(2)
@@ -266,6 +267,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
