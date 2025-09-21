@@ -219,32 +219,36 @@ SAMPLE_IMAGES = [
     "sample_images/sample-15.jpg"
 ]
 
-
-# Horizontal bar with two buttons: Try Sample and Browse File
-c1, c2 = st.columns([1, 1])
-
 img = None
-uploaded = None
-sample_choice = None
 
-# Column 1: Try Sample button
+# Initialize session state to remember selected sample
+if "sample_choice" not in st.session_state:
+    st.session_state.sample_choice = None
+
+# --- Horizontal bar with Browse + Try Sample ---
+c1, c2 = st.columns([5, 1])  # uploader column wider than button column
+
 with c1:
-    if st.button("🎨 Try Sample"):
-        sample_choice = st.selectbox("Select a sample image", SAMPLE_IMAGES, label_visibility="collapsed")
+    uploaded = st.file_uploader("", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
 
-# Column 2: Browse File button
 with c2:
-    uploaded = st.file_uploader("Browse File", type=["jpg", "jpeg", "png"], label_visibility="collapsed")
+    st.markdown("<div style='margin-top:5px;'>", unsafe_allow_html=True)
+    if st.button("Try Sample"):
+        st.session_state.sample_choice = st.selectbox(
+            "Select a sample", SAMPLE_IMAGES, label_visibility="collapsed"
+        )
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # Load image from either uploaded file or sample choice
 if uploaded is not None:
     img = Image.open(uploaded).convert("RGB")
-elif sample_choice is not None:
+elif st.session_state.sample_choice is not None:
     try:
-        img = Image.open(sample_choice).convert("RGB")
+        img = Image.open(st.session_state.sample_choice).convert("RGB")
     except FileNotFoundError:
-        st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'sample_images/' folder.")
+        st.error(f"❌ Could not find file: {st.session_state.sample_choice}.")
 
+# --- Display corrupted and restored images ---
 if img is not None:
     c1, c2 = st.columns(2)
     with c1:
@@ -252,8 +256,7 @@ if img is not None:
         st.image(img, width=300)
 
     if st.button("🔮 Restore Image"):
-
-        out_img = restore_with_tta(img, device)  
+        out_img = restore_with_tta(img, device)
 
         with c2:
             st.subheader("Restored Image")
@@ -267,6 +270,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
