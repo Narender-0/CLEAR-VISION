@@ -217,24 +217,29 @@ SAMPLE_IMAGES = [
     "sample_images/sample-13.jpg",
     "sample_images/sample-14.jpg",
     "sample_images/sample-15.jpg"
-
 ]
 
-sample_choice = st.selectbox(
-    "",  
-    [" Try a sample"] + SAMPLE_IMAGES
-)
-uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+
+c_upload, c_sample = st.columns([3, 1])
 
 img = None
+sample_choice = None
+
+with c_upload:
+    uploaded = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+
+with c_sample:
+    if st.button(" Try Sample"):
+        sample_choice = st.selectbox("Select a sample image", SAMPLE_IMAGES)
+
+# Load image
 if uploaded is not None:
     img = Image.open(uploaded).convert("RGB")
-elif sample_choice != " Try a sample":   
+elif sample_choice is not None:
     try:
         img = Image.open(sample_choice).convert("RGB")
     except FileNotFoundError:
-        st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'samples/' folder.")
-
+        st.error(f"❌ Could not find file: {sample_choice}. Make sure it exists in the 'sample_images/' folder.")
 
 
 if img is not None:
@@ -259,6 +264,7 @@ if img is not None:
             file_name="restored.png",
             mime="image/png"
         )
+
 
 
 
