@@ -4,3 +4,4 @@ torchvision
 pillow
 opencv-python-headless
 numpy
+hoho
