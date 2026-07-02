@@ -6,4 +6,3 @@ opencv-python-headless
 numpy
 pandas
 tqdm
-os
